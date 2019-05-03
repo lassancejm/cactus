@@ -390,7 +390,7 @@ class RunSelfBlast(RoundedJob):
     """
     def __init__(self, blastOptions, seqFileID):
         disk = 3*seqFileID.size
-        memory = 3*seqFileID.size
+        memory = 5*3*seqFileID.size
         
         super(RunSelfBlast, self).__init__(memory=memory, disk=disk, preemptable=True)
         self.blastOptions = blastOptions
@@ -422,11 +422,11 @@ class RunBlast(RoundedJob):
     """
     def __init__(self, blastOptions, seqFileID1, seqFileID2):
         if hasattr(seqFileID1, "size") and hasattr(seqFileID2, "size"):
-            disk = 2*(seqFileID1.size + seqFileID2.size)
-            memory = 2*(seqFileID1.size + seqFileID2.size)
+            disk = 10*2*(seqFileID1.size + seqFileID2.size)
+            memory = 7*2*(seqFileID1.size + seqFileID2.size)
         else:
-            disk = None
-            memory = None
+            disk = 2589934592
+            memory = 2589934592
         super(RunBlast, self).__init__(memory=memory, disk=disk, preemptable=True)
         self.blastOptions = blastOptions
         self.seqFileID1 = seqFileID1
