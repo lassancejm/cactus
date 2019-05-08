@@ -111,7 +111,7 @@ class CactusJob(RoundedJob):
         if hasattr(self, 'memoryPoly'):
             # Memory should be determined by a polynomial fit on the
             # input size
-            memory = self.evaluateResourcePoly(self.memoryPoly)
+            memory = 3*self.evaluateResourcePoly(self.memoryPoly)
             if hasattr(self, 'memoryCap'):
                 memory = int(min(memory, self.memoryCap))
 
