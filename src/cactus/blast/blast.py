@@ -254,7 +254,8 @@ class TrimAndRecurseOnOutgroups(RoundedJob):
                  outgroupNames, outgroupSequenceIDs, outgroupFragmentIDs,
                  mostRecentResultsID, outgroupResultsID,
                  blastOptions, outgroupNumber, ingroupCoverageIDs):
-        super(TrimAndRecurseOnOutgroups, self).__init__(preemptable=True)
+        memory = 7900000000
+        super(TrimAndRecurseOnOutgroups, self).__init__(memory=memory, preemptable=True)    
         self.ingroupNames = ingroupNames
         self.untrimmedSequenceIDs = untrimmedSequenceIDs
         self.sequenceIDs = sequenceIDs
