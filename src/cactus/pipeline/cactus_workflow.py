@@ -185,7 +185,7 @@ class CactusPhasesJob(CactusJob):
 
         if launchSecondaryKtForRecursiveJob and ExperimentWrapper(self.cactusWorkflowArguments.experimentNode).getDbType() == "kyoto_tycoon":
             cw = ConfigWrapper(self.cactusWorkflowArguments.configNode)
-            memory = max(2500000000, self.evaluateResourcePoly([4.10201882, 2.01324291e+08]))
+            memory = max(2500000000, 1.5*self.evaluateResourcePoly([4.10201882, 2.01324291e+08]))
             cpu = cw.getKtserverCpu(default=0.1)
             dbElem = ExperimentWrapper(self.cactusWorkflowArguments.scratchDbElemNode)
             dbString = self.addService(KtServerService(dbElem=dbElem, isSecondary=True, memory=memory, cores=cpu)).rv(0)
@@ -273,7 +273,7 @@ class StartPrimaryDB(CactusPhasesJob):
         cw = ConfigWrapper(self.cactusWorkflowArguments.configNode)
 
         if self.cactusWorkflowArguments.experimentWrapper.getDbType() == "kyoto_tycoon":
-            memory = max(2500000000, self.evaluateResourcePoly([4.10201882, 2.01324291e+08]))
+            memory = max(2500000000, 1.5*self.evaluateResourcePoly([4.10201882, 2.01324291e+08]))
             cores = cw.getKtserverCpu(default=0.1)
             dbElem = ExperimentWrapper(self.cactusWorkflowArguments.experimentNode)
             service = self.addService(KtServerService(dbElem=dbElem,
@@ -718,7 +718,7 @@ class CactusCafWrapper(CactusRecursionJob):
     """
     featuresFn = lambda self: {'alignmentsSize': self.cactusWorkflowArguments.alignmentsID.size}
     memoryPoly = [1.80395944e+01, 7.96042247e+07]
-    memoryCap = 120e09
+    memoryCap = 250e09
     feature = 'totalSequenceSize'
 
     def __init__(self, **kwargs):
